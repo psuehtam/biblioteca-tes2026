@@ -5,10 +5,10 @@ List<Usuario> usuarios = new List<Usuario>();
 List<Emprestimo> emprestimos = new List<Emprestimo>();
 
 
-usuarios.Add(new Usuario("Ana", 25, "111111111"));
-usuarios.Add(new Usuario("Carlos", 30, "222222222"));
-usuarios.Add(new Usuario("Beatriz", 20, "333333333"));
-usuarios.Add(new Usuario("Daniel", 35, "444444444"));
+usuarios.Add(new Usuario("Ana", 25, "4112345678"));
+usuarios.Add(new Usuario("Carlos", 30, "4112345678"));
+usuarios.Add(new Usuario("Beatriz", 20, "4112345678"));
+usuarios.Add(new Usuario("Daniel", 35, "4112345678"));
 
 livros.Add(new Livro("Harry Potter", "J.K. Rowling", 1997));
 livros.Add(new Livro("Dom Quixote", "Cervantes", 1605));
@@ -34,35 +34,50 @@ do
     Console.WriteLine("10 - Devolver Livro");
     Console.WriteLine("0 - Sair");
     Console.Write("Digite sua escolha: ");
-    escolha = int.Parse(Console.ReadLine());
+    string? input;
+    do
+    {
+        input = Console.ReadLine();
+    } while (string.IsNullOrWhiteSpace(input) || !int.TryParse(input, out escolha));
 
     switch (escolha)
     {
-        case 1: Biblioteca.CadastrarUsuario(usuarios);                              
-        break;
-        case 2: Biblioteca.ListarUsuarios(usuarios);                              
-        break;
-        case 3: Biblioteca.CadastrarLivro(livros);                              
-        break;
-        case 4: Biblioteca.ListarLivros(livros, emprestimos);                              
-        break;
-        case 5: Biblioteca.BuscarLivro(livros);                         
-        break;
-        case 6: Biblioteca.ExcluirLivro(livros);                              
-        break;
-        case 7: Biblioteca.ListarLirvosDisponiveis(livros);                             
-        break;
-        case 8: Biblioteca.ListarLirvosEmprestados(emprestimos);                             
-        break;
-        case 9: Biblioteca.RealizarEmprestimo(livros, usuarios, emprestimos);                              
-        break;
-        case 10:                              
-        break;
-        case 0:     Console.WriteLine("Saindo do sistema...");                        
-        break;
-        
-        default: Console.WriteLine("Opção inválida. Tente novamente.");             
-        break;
+        case 1:
+            Biblioteca.CadastrarUsuario(usuarios);
+            break;
+        case 2:
+            Biblioteca.ListarUsuarios(usuarios);
+            break;
+        case 3:
+            Biblioteca.CadastrarLivro(livros);
+            break;
+        case 4:
+            Biblioteca.ListarLivros(livros, emprestimos);
+            break;
+        case 5:
+            Biblioteca.BuscarLivro(livros, emprestimos);
+            break;
+        case 6:
+            Biblioteca.ExcluirLivro(livros);
+            break;
+        case 7:
+            Biblioteca.ListarLirvosDisponiveis(livros);
+            break;
+        case 8:
+            Biblioteca.ListarLirvosEmprestados(emprestimos);
+            break;
+        case 9:
+            Biblioteca.RealizarEmprestimo(livros, usuarios, emprestimos);
+            break;
+        case 10:
+            break;
+        case 0:
+            Console.WriteLine("Saindo do sistema...");
+            break;
+
+        default:
+            Console.WriteLine("Opção inválida. Tente novamente.");
+            break;
     }
 
 } while (escolha != 0);
