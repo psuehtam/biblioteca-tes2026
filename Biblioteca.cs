@@ -26,12 +26,21 @@ class Biblioteca
         }
     }
 
- public static void ListarLivros(List<Livro> livros)
+ public static void ListarLivros(List<Livro> livros, List<Emprestimo> emprestimos)
     {
         Console.WriteLine("\nLista de Livros:");
         foreach (Livro livro in livros)
         {
             livro.Exibir();
+            if (!livro.Disponivel)
+            {
+                Emprestimo emprestimo = emprestimos.Find(e => e.Livro == livro);
+                if (emprestimo != null)
+                {
+                    Console.WriteLine("Emprestado por: " + emprestimo.Usuario.Nome);
+                }
+            }
+            Console.WriteLine(); // Para separar os livros
         }
     }
 
@@ -111,24 +120,24 @@ class Biblioteca
                         existeLivroDisponivel = true;
                     }
                 }
-                if(!existeLivroDisponivel == false){
+                if(existeLivroDisponivel == false){
                     Console.WriteLine("Nenhum livro disponível no momento.");
                 }
     }
 
-    public static void ListarLirvosEmprestados(List<Livro> livros)
+    public static void ListarLirvosEmprestados(List<Emprestimo> emprestimos)
     {
-        bool existeLivroEmprestado = false;
+        if (emprestimos.Count == 0)
+        {
+            Console.WriteLine("Nenhum livro emprestado no momento.");
+            return;
+        }
 
-                foreach (Livro livro in livros){
-                    if(!livro.Disponivel){
-                        livro.Exibir();
-                        existeLivroEmprestado = true;
-                    }
-                }
-                if(!existeLivroEmprestado == false){
-                    Console.WriteLine("Nenhum livro emprestado no momento.");
-                }
+        Console.WriteLine("\nLista de Livros Emprestados:");
+        foreach (Emprestimo emprestimo in emprestimos)
+        {
+            emprestimo.Exibir();
+}
     }
 
     public static void RealizarEmprestimo(List<Livro> livros, List<Usuario> usuarios, List<Emprestimo> emprestimos)

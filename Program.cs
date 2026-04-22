@@ -44,7 +44,7 @@ do
         break;
         case 3: Biblioteca.CadastrarLivro(livros);                              
         break;
-        case 4: Biblioteca.ListarLivros(livros);                              
+        case 4: Biblioteca.ListarLivros(livros, emprestimos);                              
         break;
         case 5: Biblioteca.BuscarLivro(livros);                         
         break;
@@ -52,7 +52,7 @@ do
         break;
         case 7: Biblioteca.ListarLirvosDisponiveis(livros);                             
         break;
-        case 8: Biblioteca.ListarLirvosEmprestados(livros);                             
+        case 8: Biblioteca.ListarLirvosEmprestados(emprestimos);                             
         break;
         case 9: Biblioteca.RealizarEmprestimo(livros, usuarios, emprestimos);                              
         break;
