@@ -4,14 +4,17 @@ List<Livro> livros = new List<Livro>();
 List<Usuario> usuarios = new List<Usuario>();
 List<Emprestimo> emprestimos = new List<Emprestimo>();
 
-usuarios.Add(new Usuario("João Silva", 28, "11999999999"));
-usuarios.Add(new Usuario("Maria Santos", 35, "11988888888"));
-usuarios.Add(new Usuario("Pedro Oliveira", 22, "11977777777"));
 
-livros.Add(new Livro("Clean Code", "Robert Martin", 2008));
-livros.Add(new Livro("Design Patterns", "Gang of Four", 1994));
-livros.Add(new Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954));
-livros.Add(new Livro("1984", "George Orwell", 1949));
+usuarios.Add(new Usuario("Ana", 25, "111111111"));
+usuarios.Add(new Usuario("Carlos", 30, "222222222"));
+usuarios.Add(new Usuario("Beatriz", 20, "333333333"));
+usuarios.Add(new Usuario("Daniel", 35, "444444444"));
+
+livros.Add(new Livro("Harry Potter", "J.K. Rowling", 1997));
+livros.Add(new Livro("Dom Quixote", "Cervantes", 1605));
+livros.Add(new Livro("Biblia", "Varios", 0));
+livros.Add(new Livro("Crepusculo", "Stephenie Meyer", 2005));
+livros.Add(new Livro("Senhor dos Aneis", "Tolkien", 1954));
 
 int escolha = 0;
 
