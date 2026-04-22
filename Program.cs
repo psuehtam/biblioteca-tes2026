@@ -58,7 +58,7 @@ do
         break;
         case 10:                              
         break;
-        case 0:                              
+        case 0:     Console.WriteLine("Saindo do sistema...");                        
         break;
         
         default: Console.WriteLine("Opção inválida. Tente novamente.");             

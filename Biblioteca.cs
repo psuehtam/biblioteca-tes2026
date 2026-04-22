@@ -104,6 +104,12 @@ class Biblioteca
             Console.WriteLine("Livro não encontrado na biblioteca.");
             return;
         }
+        
+        if (!livroEncontrado.Disponivel)
+        {
+            Console.WriteLine("O livro está emprestado e não pode ser excluído.");
+            return;
+        }
 
         livros.Remove(livroEncontrado);
 
