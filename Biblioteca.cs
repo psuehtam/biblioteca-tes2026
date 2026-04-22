@@ -95,6 +95,12 @@ class Biblioteca
             Console.WriteLine("Livro não encontrado na biblioteca.");
             return;
         }
+        
+        if (!livroEncontrado.Disponivel)
+        {
+            Console.WriteLine("O livro está emprestado e não pode ser excluído.");
+            return;
+        }
 
         livros.Remove(livroEncontrado);
 
@@ -111,7 +117,7 @@ class Biblioteca
                         existeLivroDisponivel = true;
                     }
                 }
-                if(!existeLivroDisponivel == false){
+                if(existeLivroDisponivel == false){
                     Console.WriteLine("Nenhum livro disponível no momento.");
                 }
     }
@@ -126,7 +132,7 @@ class Biblioteca
                         existeLivroEmprestado = true;
                     }
                 }
-                if(!existeLivroEmprestado == false){
+                if(existeLivroEmprestado == false){
                     Console.WriteLine("Nenhum livro emprestado no momento.");
                 }
     }
