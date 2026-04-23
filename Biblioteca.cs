@@ -171,7 +171,7 @@ class Biblioteca
         Console.WriteLine($"O livro '{livroEncontrado.Titulo}' foi excluído do sistema.");
     }
 
-    public static void ListarLirvosDisponiveis(List<Livro> livros)
+    public static void ListarLivrosDisponiveis(List<Livro> livros)
     {
         bool existeLivroDisponivel = false;
 
@@ -189,7 +189,7 @@ class Biblioteca
         }
     }
 
-    public static void ListarLirvosEmprestados(List<Emprestimo> emprestimos)
+    public static void ListarLivrosEmprestados(List<Emprestimo> emprestimos)
     {
         if (emprestimos.Count == 0)
         {
@@ -252,5 +252,61 @@ class Biblioteca
         livroEncontrado.Disponivel = false;
         Console.WriteLine("Empréstimo realizado com sucesso!");
 
+    }
+    public static void DevolverLivro(List<Livro> livros, List<Usuario> usuarios, List<Emprestimo> emprestimos)
+    {
+        Console.WriteLine("Digite o nome do usuário que deseja realizar a devolução: ");
+        string nomeUsuario = Console.ReadLine();
+        Usuario usuarioEncontrado = null;
+        foreach (Usuario usuario in usuarios)
+        {
+            if (usuario.Nome.Equals(nomeUsuario, StringComparison.OrdinalIgnoreCase))
+            {
+                usuarioEncontrado = usuario;
+                break;
+            }
+        }
+        if (usuarioEncontrado == null)
+        {
+            Console.WriteLine("Usuário não encontrado.");
+            return;
+        }
+
+        Console.WriteLine("Digite o título do livro que deseja devolver: ");
+        string tituloLivro = Console.ReadLine();
+        Livro livroEncontrado = null;
+        foreach (Livro livro in livros)
+        {
+            if (livro.Titulo.Equals(tituloLivro, StringComparison.OrdinalIgnoreCase))
+            {
+                livroEncontrado = livro;
+                break;
+
+            }
+        }
+        if (livroEncontrado == null)
+        {
+            Console.WriteLine("Livro não encontrado.");
+            return;
+        }
+
+        Emprestimo emprestimoEncontrado = null;
+        foreach (Emprestimo emprestimo in emprestimos)
+        {
+            if (emprestimo.Usuario == usuarioEncontrado && emprestimo.Livro == livroEncontrado)
+            {
+                emprestimoEncontrado = emprestimo;
+                break;
+            }
+        }
+        if (emprestimoEncontrado == null)
+        {
+            Console.WriteLine("Empréstimo não encontrado para este usuário e livro.");
+            return;
+        }
+
+        emprestimos.Remove(emprestimoEncontrado);
+        livroEncontrado.Disponivel = true;
+        Console.WriteLine("Devolução realizada com sucesso!");
     }
 }

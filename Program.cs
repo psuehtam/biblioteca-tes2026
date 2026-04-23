@@ -61,15 +61,16 @@ do
             Biblioteca.ExcluirLivro(livros);
             break;
         case 7:
-            Biblioteca.ListarLirvosDisponiveis(livros);
+            Biblioteca.ListarLivrosDisponiveis(livros);
             break;
         case 8:
-            Biblioteca.ListarLirvosEmprestados(emprestimos);
+            Biblioteca.ListarLivrosEmprestados(emprestimos);
             break;
         case 9:
             Biblioteca.RealizarEmprestimo(livros, usuarios, emprestimos);
             break;
         case 10:
+            Biblioteca.DevolverLivro(livros, usuarios, emprestimos);
             break;
         case 0:
             Console.WriteLine("Saindo do sistema...");
