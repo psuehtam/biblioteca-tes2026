@@ -5,10 +5,10 @@ List<Usuario> usuarios = new List<Usuario>();
 List<Emprestimo> emprestimos = new List<Emprestimo>();
 
 
-usuarios.Add(new Usuario("Ana", 25, "4112345678"));
-usuarios.Add(new Usuario("Carlos", 30, "4112345678"));
-usuarios.Add(new Usuario("Beatriz", 20, "4112345678"));
-usuarios.Add(new Usuario("Daniel", 35, "4112345678"));
+usuarios.Add(new Usuario("Ana", 25, "4112345671"));
+usuarios.Add(new Usuario("Carlos", 30, "4112345672"));
+usuarios.Add(new Usuario("Beatriz", 20, "4112345673"));
+usuarios.Add(new Usuario("Daniel", 35, "4112345674"));
 
 livros.Add(new Livro("Harry Potter", "J.K. Rowling", 1997));
 livros.Add(new Livro("Dom Quixote", "Cervantes", 1605));
