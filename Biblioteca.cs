@@ -8,7 +8,7 @@ class Biblioteca
         string nome;
         do
         {
-            nome = Console.ReadLine() ?? "";
+            nome = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(nome))
             {
                 Console.WriteLine("Nome inválido. Tente novamente: ");
@@ -76,6 +76,12 @@ class Biblioteca
 
     public static void ListarUsuarios(List<Usuario> usuarios)
     {
+        if (usuarios.Count == 0)
+        {
+            Console.WriteLine("\nNenhum usuário cadastrado.");
+            return;
+        }
+
         Console.WriteLine("\nLista de Usuários:");
         foreach (Usuario usuario in usuarios)
         {
@@ -85,12 +91,18 @@ class Biblioteca
 
     public static void ExcluirUsuario(List<Usuario> usuarios, List<Emprestimo> emprestimos)
     {
+        if (usuarios.Count == 0)
+        {
+            Console.WriteLine("\nNenhum usuário cadastrado para excluir.");
+            return;
+        }
+
         Console.WriteLine("\nExclusão de Usuário:");
         Console.Write("Digite o nome do usuário que deseja excluir: ");
         string nome;
         do
         {
-            nome = Console.ReadLine() ?? "";
+            nome = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(nome))
             {
                 Console.WriteLine("Nome inválido. Tente novamente: ");
@@ -152,6 +164,12 @@ class Biblioteca
 
     public static void ListarLivros(List<Livro> livros, List<Emprestimo> emprestimos)
     {
+        if (livros.Count == 0)
+        {
+            Console.WriteLine("\nNenhum livro cadastrado.");
+            return;
+        }
+
         Console.WriteLine("\nLista de Livros:");
         foreach (Livro livro in livros)
         {
@@ -170,11 +188,18 @@ class Biblioteca
 
     public static void BuscarLivro(List<Livro> livros, List<Emprestimo> emprestimos)
     {
+        if (livros.Count == 0)
+        {
+            Console.WriteLine("\nNenhum livro cadastrado para buscar.");
+            return;
+        }
+
+        Console.WriteLine("\nBuscar Livro:");
         Console.WriteLine("Digite o título do livro que deseja buscar: ");
         string tituloBusca;
         do
         {
-            tituloBusca = Console.ReadLine() ?? "";
+            tituloBusca = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(tituloBusca))
             {
                 Console.WriteLine("Título inválido. Tente novamente: ");
@@ -220,7 +245,7 @@ class Biblioteca
         string titulo;
         do
         {
-            titulo = Console.ReadLine() ?? "";
+            titulo = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(titulo))
             {
                 Console.WriteLine("Título inválido. Tente novamente: ");
@@ -231,7 +256,7 @@ class Biblioteca
         string autor;
         do
         {
-            autor = Console.ReadLine() ?? "";
+            autor = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(autor))
             {
                 Console.WriteLine("Autor inválido. Tente novamente: ");
@@ -248,11 +273,11 @@ class Biblioteca
             {
                 Console.WriteLine("Ano inválido. Digite um número: ");
             }
-            else if (ano < 0)
+            else if (ano < 0 || ano > DateTime.Now.Year)
             {
-                Console.WriteLine("Ano não pode ser negativo. Tente novamente: ");
+                Console.WriteLine($"Ano deve ser entre 0 e {DateTime.Now.Year}. Tente novamente: ");
             }
-        } while (!int.TryParse(inputAno, out ano) || ano < 0);
+        } while (!int.TryParse(inputAno, out ano) || ano < 0 || ano > DateTime.Now.Year);
 
         livros.Add(new Livro(titulo, autor, ano));
         Console.WriteLine("Livro cadastrado com sucesso!");
@@ -260,12 +285,18 @@ class Biblioteca
 
     public static void ExcluirLivro(List<Livro> livros)
     {
+        if (livros.Count == 0)
+        {
+            Console.WriteLine("\nNenhum livro cadastrado para excluir.");
+            return;
+        }
+
         Console.WriteLine("\nExclusão de Livro:");
         Console.Write("Digite o título do livro que deseja excluir: ");
         string tituloBusca;
         do
         {
-            tituloBusca = Console.ReadLine() ?? "";
+            tituloBusca = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(tituloBusca))
             {
                 Console.WriteLine("Título inválido. Tente novamente: ");
@@ -382,12 +413,18 @@ class Biblioteca
 
     public static void RealizarEmprestimo(List<Livro> livros, List<Usuario> usuarios, List<Emprestimo> emprestimos)
     {
+        if (usuarios.Count == 0 || livros.Count == 0)
+        {
+            Console.WriteLine("\nVocê precisa de pelo menos um usuário e um livro cadastrado para fazer um empréstimo.");
+            return;
+        }
+
         Console.WriteLine("\nRealizar Empréstimo:");
         Console.Write("Digite o nome do usuário que deseja realizar o empréstimo: ");
         string nomeUsuario;
         do
         {
-            nomeUsuario = Console.ReadLine() ?? "";
+            nomeUsuario = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(nomeUsuario))
             {
                 Console.WriteLine("Nome inválido. Tente novamente: ");
@@ -412,7 +449,7 @@ class Biblioteca
         string tituloLivro;
         do
         {
-            tituloLivro = Console.ReadLine() ?? "";
+            tituloLivro = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(tituloLivro))
             {
                 Console.WriteLine("Título inválido. Tente novamente: ");
@@ -496,12 +533,18 @@ class Biblioteca
     }
     public static void DevolverLivro(List<Livro> livros, List<Usuario> usuarios, List<Emprestimo> emprestimos)
     {
+        if (usuarios.Count == 0 || emprestimos.Count == 0)
+        {
+            Console.WriteLine("\nNão há empréstimos para devolver.");
+            return;
+        }
+
         Console.WriteLine("\nDevolução de Livro:");
         Console.Write("Digite o nome do usuário que deseja realizar a devolução: ");
         string nomeUsuario;
         do
         {
-            nomeUsuario = Console.ReadLine() ?? "";
+            nomeUsuario = Console.ReadLine()?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(nomeUsuario))
             {
                 Console.WriteLine("Nome inválido. Tente novamente: ");
@@ -522,49 +565,47 @@ class Biblioteca
             return;
         }
 
-        Console.Write("Digite o título do livro que deseja devolver: ");
-        string tituloLivro;
-        do
-        {
-            tituloLivro = Console.ReadLine() ?? "";
-            if (string.IsNullOrWhiteSpace(tituloLivro))
-            {
-                Console.WriteLine("Título inválido. Tente novamente: ");
-            }
-        } while (string.IsNullOrWhiteSpace(tituloLivro));
-        Livro livroEncontrado = null;
-        foreach (Livro livro in livros)
-        {
-            if (livro.Titulo.Equals(tituloLivro, StringComparison.OrdinalIgnoreCase))
-            {
-                livroEncontrado = livro;
-                break;
-
-            }
-        }
-        if (livroEncontrado == null)
-        {
-            Console.WriteLine("Livro não encontrado.");
-            return;
-        }
-
-        Emprestimo emprestimoEncontrado = null;
+        List<Emprestimo> emprestimosDusuario = new List<Emprestimo>();
         foreach (Emprestimo emprestimo in emprestimos)
         {
-            if (emprestimo.Usuario == usuarioEncontrado && emprestimo.Livro == livroEncontrado)
+            if (emprestimo.Usuario == usuarioEncontrado)
             {
-                emprestimoEncontrado = emprestimo;
-                break;
+                emprestimosDusuario.Add(emprestimo);
             }
         }
-        if (emprestimoEncontrado == null)
+
+        if (emprestimosDusuario.Count == 0)
         {
-            Console.WriteLine("Empréstimo não encontrado para este usuário e livro.");
+            Console.WriteLine("Este usuário não possui livros emprestados.");
             return;
         }
 
-        emprestimos.Remove(emprestimoEncontrado);
-        livroEncontrado.Disponivel = true;
-        Console.WriteLine("Devolução realizada com sucesso!");
+        Console.WriteLine("\nLivros emprestados por " + usuarioEncontrado.Nome + ":");
+        for (int i = 0; i < emprestimosDusuario.Count; i++)
+        {
+            Console.WriteLine((i + 1) + " - " + emprestimosDusuario[i].Livro.Titulo +
+                            " | Devolução prevista: " + emprestimosDusuario[i].DataDevolucaoPrevista.ToString("dd/MM/yyyy"));
+        }
+
+        Console.Write("\nEscolha o número do livro que deseja devolver: ");
+        int escolha;
+        string input;
+        do
+        {
+            input = Console.ReadLine() ?? "";
+            if (!int.TryParse(input, out escolha) || escolha < 1 || escolha > emprestimosDusuario.Count)
+            {
+                Console.WriteLine("Opção inválida. Escolha um número entre 1 e " + emprestimosDusuario.Count + ": ");
+            }
+            else
+            {
+                break;
+            }
+        } while (true);
+
+        Emprestimo emprestimoParaDevolver = emprestimosDusuario[escolha - 1];
+        emprestimos.Remove(emprestimoParaDevolver);
+        emprestimoParaDevolver.Livro.Disponivel = true;
+        Console.WriteLine("Devolução do livro '" + emprestimoParaDevolver.Livro.Titulo + "' realizada com sucesso!");
     }
 }
