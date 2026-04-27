@@ -24,14 +24,15 @@ do
 
     Console.WriteLine("1 - Cadastrar Usuário");
     Console.WriteLine("2 - Listar Usuários");
-    Console.WriteLine("3 - Cadastrar Livro");
-    Console.WriteLine("4 - Listar Todos os Livros");
-    Console.WriteLine("5 - Buscar Livro");
-    Console.WriteLine("6 - Excluir Livro");
-    Console.WriteLine("7 - Consultar Livros Disponíveis");
-    Console.WriteLine("8 - Consultar Livros Emprestados");
-    Console.WriteLine("9 - Realizar Empréstimo");
-    Console.WriteLine("10 - Devolver Livro");
+    Console.WriteLine("3 - Excluir Usuário");
+    Console.WriteLine("4 - Cadastrar Livro");
+    Console.WriteLine("5 - Listar Todos os Livros");
+    Console.WriteLine("6 - Buscar Livro");
+    Console.WriteLine("7 - Excluir Livro");
+    Console.WriteLine("8 - Consultar Livros Disponíveis");
+    Console.WriteLine("9 - Consultar Livros Emprestados");
+    Console.WriteLine("10 - Realizar Empréstimo");
+    Console.WriteLine("11 - Devolver Livro");
     Console.WriteLine("0 - Sair");
     Console.Write("Digite sua escolha: ");
     string? input;
@@ -49,27 +50,30 @@ do
             Biblioteca.ListarUsuarios(usuarios);
             break;
         case 3:
-            Biblioteca.CadastrarLivro(livros);
+            Biblioteca.ExcluirUsuario(usuarios, emprestimos);
             break;
         case 4:
-            Biblioteca.ListarLivros(livros, emprestimos);
+            Biblioteca.CadastrarLivro(livros);
             break;
         case 5:
-            Biblioteca.BuscarLivro(livros, emprestimos);
+            Biblioteca.ListarLivros(livros, emprestimos);
             break;
         case 6:
-            Biblioteca.ExcluirLivro(livros);
+            Biblioteca.BuscarLivro(livros, emprestimos);
             break;
         case 7:
-            Biblioteca.ListarLivrosDisponiveis(livros);
+            Biblioteca.ExcluirLivro(livros);
             break;
         case 8:
-            Biblioteca.ListarLivrosEmprestados(emprestimos);
+            Biblioteca.ListarLivrosDisponiveis(livros);
             break;
         case 9:
-            Biblioteca.RealizarEmprestimo(livros, usuarios, emprestimos);
+            Biblioteca.ListarLivrosEmprestados(emprestimos);
             break;
         case 10:
+            Biblioteca.RealizarEmprestimo(livros, usuarios, emprestimos);
+            break;
+        case 11:
             Biblioteca.DevolverLivro(livros, usuarios, emprestimos);
             break;
         case 0:
