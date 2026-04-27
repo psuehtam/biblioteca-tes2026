@@ -17,7 +17,8 @@ namespace biblioteca_tes2026.Models
 
         public void Exibir()
         {
-            Console.WriteLine(Titulo + " - " + Autor + " (" + AnoPublicacao + ") - " + (Disponivel ? "Disponível" : "Alugado"));
+            string status = Disponivel ? "Disponível" : "Emprestado";
+            Console.WriteLine($"Título: {Titulo} | Autor: {Autor} | Ano: {AnoPublicacao} | Status: {status}");
         }
     }
 }

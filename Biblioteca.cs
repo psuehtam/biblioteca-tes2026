@@ -2,8 +2,14 @@ using biblioteca_tes2026.Models;
 
 class Biblioteca
 {
+    private static void MostrarTitulo(string titulo)
+    {
+        Console.WriteLine($"\n========== {titulo.ToUpper()} ==========");
+    }
+
     public static void CadastrarUsuario(List<Usuario> usuarios)
     {
+        MostrarTitulo("Cadastrar Usuario");
         Console.Write("Digite o nome do usuário: ");
         string nome;
         do
@@ -76,13 +82,13 @@ class Biblioteca
 
     public static void ListarUsuarios(List<Usuario> usuarios)
     {
+        MostrarTitulo("Listar Usuarios");
         if (usuarios.Count == 0)
         {
-            Console.WriteLine("\nNenhum usuário cadastrado.");
+            Console.WriteLine("Nenhum usuário cadastrado.");
             return;
         }
 
-        Console.WriteLine("\nLista de Usuários:");
         foreach (Usuario usuario in usuarios)
         {
             usuario.Exibir();
@@ -91,13 +97,13 @@ class Biblioteca
 
     public static void ExcluirUsuario(List<Usuario> usuarios, List<Emprestimo> emprestimos)
     {
+        MostrarTitulo("Excluir Usuario");
         if (usuarios.Count == 0)
         {
-            Console.WriteLine("\nNenhum usuário cadastrado para excluir.");
+            Console.WriteLine("Nenhum usuário cadastrado para excluir.");
             return;
         }
 
-        Console.WriteLine("\nExclusão de Usuário:");
         Console.Write("Digite o nome do usuário que deseja excluir: ");
         string nome;
         do
@@ -109,7 +115,7 @@ class Biblioteca
             }
         } while (string.IsNullOrWhiteSpace(nome));
 
-        Usuario usuarioParaExcluir = null;
+        Usuario? usuarioParaExcluir = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
@@ -164,37 +170,36 @@ class Biblioteca
 
     public static void ListarLivros(List<Livro> livros, List<Emprestimo> emprestimos)
     {
+        MostrarTitulo("Listar Livros");
         if (livros.Count == 0)
         {
-            Console.WriteLine("\nNenhum livro cadastrado.");
+            Console.WriteLine("Nenhum livro cadastrado.");
             return;
         }
 
-        Console.WriteLine("\nLista de Livros:");
         foreach (Livro livro in livros)
         {
             livro.Exibir();
             if (!livro.Disponivel)
             {
-                Emprestimo emprestimo = emprestimos.Find(e => e.Livro == livro);
+                Emprestimo? emprestimo = emprestimos.Find(e => e.Livro == livro);
                 if (emprestimo != null)
                 {
                     Console.WriteLine("Emprestado por: " + emprestimo.Usuario.Nome);
                 }
             }
-            Console.WriteLine();
         }
     }
 
     public static void BuscarLivro(List<Livro> livros, List<Emprestimo> emprestimos)
     {
+        MostrarTitulo("Buscar Livro");
         if (livros.Count == 0)
         {
-            Console.WriteLine("\nNenhum livro cadastrado para buscar.");
+            Console.WriteLine("Nenhum livro cadastrado para buscar.");
             return;
         }
 
-        Console.WriteLine("\nBuscar Livro:");
         Console.WriteLine("Digite o título do livro que deseja buscar: ");
         string tituloBusca;
         do
@@ -234,13 +239,13 @@ class Biblioteca
                     Console.WriteLine("Emprestado por: " + emprestimo.Usuario.Nome);
                 }
             }
-            Console.WriteLine();
         }
     }
 
 
     public static void CadastrarLivro(List<Livro> livros)
     {
+        MostrarTitulo("Cadastrar Livro");
         Console.Write("Digite o título do livro: ");
         string titulo;
         do
@@ -279,19 +284,37 @@ class Biblioteca
             }
         } while (!int.TryParse(inputAno, out ano) || ano < 0 || ano > DateTime.Now.Year);
 
+        bool livroDuplicado = false;
+        foreach (Livro livro in livros)
+        {
+            if (livro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase) &&
+                livro.Autor.Equals(autor, StringComparison.OrdinalIgnoreCase) &&
+                livro.AnoPublicacao == ano)
+            {
+                livroDuplicado = true;
+                break;
+            }
+        }
+
+        if (livroDuplicado)
+        {
+            Console.WriteLine("Já existe um livro com o mesmo título, autor e ano.");
+            return;
+        }
+
         livros.Add(new Livro(titulo, autor, ano));
         Console.WriteLine("Livro cadastrado com sucesso!");
     }
 
     public static void ExcluirLivro(List<Livro> livros)
     {
+        MostrarTitulo("Excluir Livro");
         if (livros.Count == 0)
         {
-            Console.WriteLine("\nNenhum livro cadastrado para excluir.");
+            Console.WriteLine("Nenhum livro cadastrado para excluir.");
             return;
         }
 
-        Console.WriteLine("\nExclusão de Livro:");
         Console.Write("Digite o título do livro que deseja excluir: ");
         string tituloBusca;
         do
@@ -318,14 +341,14 @@ class Biblioteca
             return;
         }
 
-        Livro livroParaExcluir = null;
+        Livro? livroParaExcluir = null;
 
         if (livrosEncontrados.Count > 1)
         {
             Console.WriteLine("\nMúltiplos livros encontrados com este título:\n");
             for (int i = 0; i < livrosEncontrados.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - Autor: {livrosEncontrados[i].Autor} | Ano: {livrosEncontrados[i].AnoPublicacao}");
+                Console.WriteLine($"{i + 1} - Título: {livrosEncontrados[i].Titulo} | Autor: {livrosEncontrados[i].Autor} | Ano: {livrosEncontrados[i].AnoPublicacao}");
             }
 
             Console.Write("\nDigite o número do livro que deseja excluir: ");
@@ -380,6 +403,7 @@ class Biblioteca
 
     public static void ListarLivrosDisponiveis(List<Livro> livros)
     {
+        MostrarTitulo("Livros Disponiveis");
         bool existeLivroDisponivel = false;
 
         foreach (Livro livro in livros)
@@ -398,13 +422,13 @@ class Biblioteca
 
     public static void ListarLivrosEmprestados(List<Emprestimo> emprestimos)
     {
+        MostrarTitulo("Livros Emprestados");
         if (emprestimos.Count == 0)
         {
             Console.WriteLine("Nenhum livro emprestado no momento.");
             return;
         }
 
-        Console.WriteLine("\nLista de Livros Emprestados:");
         foreach (Emprestimo emprestimo in emprestimos)
         {
             emprestimo.Exibir();
@@ -413,13 +437,13 @@ class Biblioteca
 
     public static void RealizarEmprestimo(List<Livro> livros, List<Usuario> usuarios, List<Emprestimo> emprestimos)
     {
+        MostrarTitulo("Realizar Emprestimo");
         if (usuarios.Count == 0 || livros.Count == 0)
         {
-            Console.WriteLine("\nVocê precisa de pelo menos um usuário e um livro cadastrado para fazer um empréstimo.");
+            Console.WriteLine("Você precisa de pelo menos um usuário e um livro cadastrado para fazer um empréstimo.");
             return;
         }
 
-        Console.WriteLine("\nRealizar Empréstimo:");
         Console.Write("Digite o nome do usuário que deseja realizar o empréstimo: ");
         string nomeUsuario;
         do
@@ -430,7 +454,7 @@ class Biblioteca
                 Console.WriteLine("Nome inválido. Tente novamente: ");
             }
         } while (string.IsNullOrWhiteSpace(nomeUsuario));
-        Usuario usuarioEncontrado = null;
+        Usuario? usuarioEncontrado = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nomeUsuario, StringComparison.OrdinalIgnoreCase))
@@ -471,7 +495,7 @@ class Biblioteca
             return;
         }
 
-        Livro livroEncontrado = null;
+        Livro? livroEncontrado = null;
 
         if (livrosEncontrados.Count > 1)
         {
@@ -479,7 +503,7 @@ class Biblioteca
             for (int i = 0; i < livrosEncontrados.Count; i++)
             {
                 string statusDisp = livrosEncontrados[i].Disponivel ? "Disponível" : "Indisponível";
-                Console.WriteLine($"{i + 1} - Autor: {livrosEncontrados[i].Autor} | Ano: {livrosEncontrados[i].AnoPublicacao} | Status: {statusDisp}");
+                Console.WriteLine($"{i + 1} - Título: {livrosEncontrados[i].Titulo} | Autor: {livrosEncontrados[i].Autor} | Ano: {livrosEncontrados[i].AnoPublicacao} | Status: {statusDisp}");
             }
 
             Console.Write("\nDigite o número do livro que deseja emprestar: ");
@@ -533,13 +557,13 @@ class Biblioteca
     }
     public static void DevolverLivro(List<Livro> livros, List<Usuario> usuarios, List<Emprestimo> emprestimos)
     {
+        MostrarTitulo("Devolver Livro");
         if (usuarios.Count == 0 || emprestimos.Count == 0)
         {
-            Console.WriteLine("\nNão há empréstimos para devolver.");
+            Console.WriteLine("Não há empréstimos para devolver.");
             return;
         }
 
-        Console.WriteLine("\nDevolução de Livro:");
         Console.Write("Digite o nome do usuário que deseja realizar a devolução: ");
         string nomeUsuario;
         do
@@ -550,7 +574,7 @@ class Biblioteca
                 Console.WriteLine("Nome inválido. Tente novamente: ");
             }
         } while (string.IsNullOrWhiteSpace(nomeUsuario));
-        Usuario usuarioEncontrado = null;
+        Usuario? usuarioEncontrado = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nomeUsuario, StringComparison.OrdinalIgnoreCase))
@@ -583,8 +607,9 @@ class Biblioteca
         Console.WriteLine("\nLivros emprestados por " + usuarioEncontrado.Nome + ":");
         for (int i = 0; i < emprestimosDusuario.Count; i++)
         {
-            Console.WriteLine((i + 1) + " - " + emprestimosDusuario[i].Livro.Titulo +
-                            " | Devolução prevista: " + emprestimosDusuario[i].DataDevolucaoPrevista.ToString("dd/MM/yyyy"));
+            Console.WriteLine(
+                $"{i + 1} - Título: {emprestimosDusuario[i].Livro.Titulo} | Devolução prevista: {emprestimosDusuario[i].DataDevolucaoPrevista:dd/MM/yyyy}"
+            );
         }
 
         Console.Write("\nEscolha o número do livro que deseja devolver: ");

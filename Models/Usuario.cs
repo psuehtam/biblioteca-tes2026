@@ -15,7 +15,7 @@ namespace biblioteca_tes2026.Models
 
         public void Exibir()
         {
-            Console.WriteLine(Nome + " - " + Idade + " anos - " + Telefone);
+            Console.WriteLine($"Nome: {Nome} | Idade: {Idade} anos | Telefone: {Telefone}");
         }
     }
 }

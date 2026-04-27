@@ -18,8 +18,7 @@ namespace biblioteca_tes2026.Models
         public void Exibir()
         {
             Console.WriteLine(
-                Livro.Titulo + " → " + Usuario.Nome +
-                " | Devolução prevista: " + DataDevolucaoPrevista.ToString("dd/MM/yyyy")
+                $"Livro: {Livro.Titulo} | Usuário: {Usuario.Nome} | Empréstimo: {DataEmprestimo:dd/MM/yyyy} | Devolução: {DataDevolucaoPrevista:dd/MM/yyyy}"
             );
         }
     }
