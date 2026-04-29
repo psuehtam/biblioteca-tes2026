@@ -20,6 +20,7 @@ int escolha = 0;
 
 do
 {
+    Console.Clear();
     Console.WriteLine("\n========= SISTEMA DE BIBLIOTECA =========");
 
     Console.WriteLine("1 - Cadastrar Usuário");
@@ -84,5 +85,11 @@ do
             Console.WriteLine("Opção inválida. Tente novamente.");
             break;
     }
-
+    
+    if (escolha != 0)
+    {
+        Console.WriteLine("\nPressione ENTER para continuar...");
+        Console.ReadLine();
+    }
+    
 } while (escolha != 0);

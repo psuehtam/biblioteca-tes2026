@@ -116,6 +116,7 @@ class Biblioteca
         } while (string.IsNullOrWhiteSpace(nome));
 
         Usuario? usuarioParaExcluir = null;
+        Usuario? usuarioParaExcluir = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
@@ -182,6 +183,7 @@ class Biblioteca
             livro.Exibir();
             if (!livro.Disponivel)
             {
+                Emprestimo? emprestimo = emprestimos.Find(e => e.Livro == livro);
                 Emprestimo? emprestimo = emprestimos.Find(e => e.Livro == livro);
                 if (emprestimo != null)
                 {
@@ -342,6 +344,7 @@ class Biblioteca
         }
 
         Livro? livroParaExcluir = null;
+        Livro? livroParaExcluir = null;
 
         if (livrosEncontrados.Count > 1)
         {
@@ -455,6 +458,7 @@ class Biblioteca
             }
         } while (string.IsNullOrWhiteSpace(nomeUsuario));
         Usuario? usuarioEncontrado = null;
+        Usuario? usuarioEncontrado = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nomeUsuario, StringComparison.OrdinalIgnoreCase))
@@ -495,6 +499,7 @@ class Biblioteca
             return;
         }
 
+        Livro? livroEncontrado = null;
         Livro? livroEncontrado = null;
 
         if (livrosEncontrados.Count > 1)
@@ -578,6 +583,7 @@ class Biblioteca
                 Console.WriteLine("Nome inválido. Tente novamente: ");
             }
         } while (string.IsNullOrWhiteSpace(nomeUsuario));
+        Usuario? usuarioEncontrado = null;
         Usuario? usuarioEncontrado = null;
         foreach (Usuario usuario in usuarios)
         {
