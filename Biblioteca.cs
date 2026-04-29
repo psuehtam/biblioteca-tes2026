@@ -116,7 +116,6 @@ class Biblioteca
         } while (string.IsNullOrWhiteSpace(nome));
 
         Usuario? usuarioParaExcluir = null;
-        Usuario? usuarioParaExcluir = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
@@ -183,7 +182,6 @@ class Biblioteca
             livro.Exibir();
             if (!livro.Disponivel)
             {
-                Emprestimo? emprestimo = emprestimos.Find(e => e.Livro == livro);
                 Emprestimo? emprestimo = emprestimos.Find(e => e.Livro == livro);
                 if (emprestimo != null)
                 {
@@ -344,7 +342,6 @@ class Biblioteca
         }
 
         Livro? livroParaExcluir = null;
-        Livro? livroParaExcluir = null;
 
         if (livrosEncontrados.Count > 1)
         {
@@ -458,7 +455,6 @@ class Biblioteca
             }
         } while (string.IsNullOrWhiteSpace(nomeUsuario));
         Usuario? usuarioEncontrado = null;
-        Usuario? usuarioEncontrado = null;
         foreach (Usuario usuario in usuarios)
         {
             if (usuario.Nome.Equals(nomeUsuario, StringComparison.OrdinalIgnoreCase))
@@ -498,8 +494,7 @@ class Biblioteca
             Console.WriteLine("Livro não encontrado.");
             return;
         }
-
-        Livro? livroEncontrado = null;
+;
         Livro? livroEncontrado = null;
 
         if (livrosEncontrados.Count > 1)
@@ -550,15 +545,15 @@ class Biblioteca
             {
                 Console.WriteLine("Quantidade inválida. Digite um número: ");
             }
-            else if (quantidadeDias <= 0)
+            else if (quantidadeDias < 1)
             {
-                Console.WriteLine("Quantidade de dias deve ser maior que zero. Tente novamente: ");
+                Console.WriteLine("Quantidade de dias deve ser maior ou igual a 1. Tente novamente: ");
             } else if (quantidadeDias > 30)
             {
                 Console.WriteLine("Quantidade de dias deve ser menor ou igual a 30. Tente novamente: ");
             }
 
-        } while (!int.TryParse(inputDias, out quantidadeDias) || quantidadeDias <= 0 || quantidadeDias > 30);
+        } while (!int.TryParse(inputDias, out quantidadeDias) || quantidadeDias < 1 || quantidadeDias > 30);
         Emprestimo emprestimo = new Emprestimo(livroEncontrado, usuarioEncontrado, quantidadeDias);
         emprestimos.Add(emprestimo);
         livroEncontrado.Disponivel = false;
@@ -583,7 +578,6 @@ class Biblioteca
                 Console.WriteLine("Nome inválido. Tente novamente: ");
             }
         } while (string.IsNullOrWhiteSpace(nomeUsuario));
-        Usuario? usuarioEncontrado = null;
         Usuario? usuarioEncontrado = null;
         foreach (Usuario usuario in usuarios)
         {

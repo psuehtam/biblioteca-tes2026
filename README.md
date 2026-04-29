@@ -32,7 +32,7 @@ O sistema permite realizar as seguintes operações:
   - Usuário e livro informados são obrigatórios e devem existir.
   - Para títulos repetidos, permite selecionar qual exemplar será emprestado.
   - Só permite empréstimo de livro disponível.
-  - Quantidade de dias deve ser numérica e maior que zero.
+  - Quantidade de dias deve ser numérica e maior ou igual a 1 e menor ou igual a 30.
 - Devolver livro com validações:
   - Usuário informado deve existir.
   - Usuário precisa ter empréstimos ativos.
