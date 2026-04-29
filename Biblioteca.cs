@@ -548,8 +548,12 @@ class Biblioteca
             else if (quantidadeDias <= 0)
             {
                 Console.WriteLine("Quantidade de dias deve ser maior que zero. Tente novamente: ");
+            } else if (quantidadeDias > 30)
+            {
+                Console.WriteLine("Quantidade de dias deve ser menor ou igual a 30. Tente novamente: ");
             }
-        } while (!int.TryParse(inputDias, out quantidadeDias) || quantidadeDias <= 0);
+
+        } while (!int.TryParse(inputDias, out quantidadeDias) || quantidadeDias <= 0 || quantidadeDias > 30);
         Emprestimo emprestimo = new Emprestimo(livroEncontrado, usuarioEncontrado, quantidadeDias);
         emprestimos.Add(emprestimo);
         livroEncontrado.Disponivel = false;
